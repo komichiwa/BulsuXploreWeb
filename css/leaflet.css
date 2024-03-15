@@ -462,23 +462,41 @@ svg.leaflet-image-layer.leaflet-interactive path {
 
 
 /* popup */
+.name{ 
+	color: #222;
+	font-weight: bold;
+	font-size: 18px;
+	margin: 0px;
+	}
 
+.college{ 
+	text-align: justify;
+	font-stretch: semi-expanded;
+	color: #ACACAC;
+	font-style: italic;
+	font-size: 12px;
+	margin:0px 0px;
+		}
 .leaflet-popup {
 	position: absolute;
 	text-align: center;
-	margin-bottom: 20px;
+	margin-bottom: 15px;
 	}
 .leaflet-popup-content-wrapper {
-	padding: 1px;
-	text-align: center;
+	padding: 2px;
+	width: 350px;
+	text-align:left;
 	border-radius: 12px;
 	}
 .leaflet-popup-content {
-	margin: 13px 19px;
-	line-height: 1.4;
+	overflow-y: auto;
+	max-height: 150px;
+	margin: 10px 10px;
+	line-height: 1.5;
 	}
 .leaflet-popup-content p {
-	margin: 18px 0;
+	align-content:left;
+	margin: 3px 0;
 	}
 .leaflet-popup-tip-container {
 	width: 40px;
@@ -489,6 +507,65 @@ svg.leaflet-image-layer.leaflet-interactive path {
 	overflow: hidden;
 	pointer-events: none;
 	}
+.mappedin-btn{
+
+	color:white;
+	position:center;
+	width: 120px ;
+	top: 5px 0px;
+	right: 10px;
+	padding:10px;
+	margin: 10px 10px;
+	font-weight:bold;
+	font-style: italic;
+	text-align: center;
+	background-color:#B8221C ;
+	border-radius: 18px 18px 18px 18px ;
+	border-width: 0;
+}
+a.mappedin-link{
+	background-color: transparent;
+	border-width: 0ch;
+	text-align: center;
+	font-style:italic;
+    color: rgb(253, 253, 253); 
+    text-decoration:None; 
+    
+}
+
+a.mappedin-link:visited, a.mappedin-link:active, a.mappedin-link:link 
+{
+	color: rgb(253, 253, 253);
+}
+.center {
+	color: white;
+	position: center;
+	text-align: center;
+	display: block;
+	margin-left: 10px ;
+	margin-right: 10px ;
+  }
+
+.mappedin-btn:hover{
+	background-color: #67A8D2;
+	border: #B8221C;
+	border-width: 2px;
+}
+
+.description {
+    overflow: hidden;
+	text-align: justify;
+}
+
+.toggle-btn {
+	background-color: transparent;
+	border-width: 0ch;
+	text-align: center;
+	font-style:italic;
+    color: blue; /* Change color as desired */
+    text-decoration: underline; /* Underline the text */
+    cursor: pointer; /* Show pointer cursor on hover */
+}
 .leaflet-popup-tip {
 	width: 17px;
 	height: 17px;
@@ -501,9 +578,10 @@ svg.leaflet-image-layer.leaflet-interactive path {
 	    -ms-transform: rotate(45deg);
 	        transform: rotate(45deg);
 	}
+
 .leaflet-popup-content-wrapper,
 .leaflet-popup-tip {
-	align-content:center;
+	align-content:left;
 	background: white;
 	color: #333;
 	box-shadow: 0 3px 14px rgba(0,0,0,0.4);
