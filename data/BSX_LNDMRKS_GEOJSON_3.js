@@ -8,7 +8,7 @@ var json_BSX_LNDMRKS_GEOJSON_3 = {
             {
                 "id": 10.0, "name": "Bulsu E-Library", "category": "Library", "colleges": null,
                 "description": "BulSU's E-Library, a modernized learning resource, grants access to diverse digital resources, catering to academic and research requirements. It facilitates convenient information access and exchange, fostering innovation and knowledge-sharing at the university.",
-                "html_exp": "./images/ELIBRARY.jpg",
+                "html_exp": "./images/eLIBRARY.jpg",
             },
             "geometry": { "type": "MultiPolygon", "coordinates": [[[[120.813321901514854, 14.858526560021595], [120.813638497575084, 14.858192059497977], [120.813864481659508, 14.858392548833011], [120.813761860867558, 14.858503345490943], [120.813825180079618, 14.858562437018604], [120.813617755074617, 14.858785085307924], [120.813321901514854, 14.858526560021595]]]] }
         },
@@ -16,7 +16,7 @@ var json_BSX_LNDMRKS_GEOJSON_3 = {
         {
             "type": "Feature", "properties": {
                 "id": null, "name": "Food Court", "category": "Food", "colleges": null, "description": null,
-                "html_exp": null,
+                "html_exp": "images/Food Court.jpg",
 
             },
             "geometry": { "type": "MultiPolygon", "coordinates": [[[[120.813660604713903, 14.857267431932568], [120.813767865275679, 14.857364775220763], [120.81399548692589, 14.857133683765877], [120.813880857317898, 14.857039506013001], [120.813660604713903, 14.857267431932568]]]] }
@@ -50,15 +50,7 @@ var json_BSX_LNDMRKS_GEOJSON_3 = {
             "geometry": { "type": "MultiPolygon", "coordinates": [[[[120.813081848010739, 14.858573055025767], [120.813487514005743, 14.858922420145383], [120.813568205061969, 14.858834811819865], [120.813172487279388, 14.85849826731204], [120.813140431928289, 14.858531387588449], [120.81312606228812, 14.85852284042083], [120.813081848010739, 14.858573055025767]]]] }
         },
 
-{
-            "type": "Feature", "properties": {
-                "id": 16.0, "name": "Valencia Hall", "category": "Reception", "colleges": null,
-                "description": " Valencia Hall supports learning for students and faculty, serving as a central spot for academic work and collaboration. It's also a place for students to connect and feel part of the university community.",
-                "html_exp": "./images/VALENCIA HALL.jpg",
-
-            },
-            "geometry": { "type": "MultiPolygon", "coordinates": [[[[120.815128969053475, 14.858124328354913], [120.815296983307519, 14.857936290234678], [120.81551363326669, 14.858124328354913], [120.815343408298773, 14.858307024326283], [120.815128969053475, 14.858124328354913]]]] }
-        }, {
+        {
             "type": "Feature", "properties": {
                 "id": 16.0, "name": "Valencia Hall", "category": "Reception", "colleges": null,
                 "description": "Valencia Hall supports learning for students and faculty, serving as a central spot for academic work and collaboration. It's also a place for students to connect and feel part of the university community.",
@@ -77,16 +69,9 @@ var json_BSX_LNDMRKS_GEOJSON_3 = {
             },
             "geometry": { "type": "MultiPolygon", "coordinates": [[[[120.812602464260635, 14.857339450141872], [120.812994388349011, 14.856932138048567], [120.813184345985178, 14.857126297276931], [120.812803339002329, 14.85751672563169], [120.812602464260635, 14.857339450141872]]]] }
         },
-        {
-            "type": "Feature", "properties":
-            {
-                "id": 10.0, "name": "Bulsu E-Library", "category": "Library", "colleges": null,
-                "description": "BulSU's E-Library, a modernized learning resource, grants access to diverse digital resources, catering to academic and research requirements. It facilitates convenient information access and exchange, fostering innovation and knowledge-sharing at the university.",
-                "html_exp": "./images/E LIBRARY.jpg",
+       
 
-            },
-            "geometry": { "type": "MultiPolygon", "coordinates": [[[[120.813321901514854, 14.858526560021595], [120.813638497575084, 14.858192059497977], [120.813864481659508, 14.858392548833011], [120.813761860867558, 14.858503345490943], [120.813825180079618, 14.858562437018604], [120.813617755074617, 14.858785085307924], [120.813321901514854, 14.858526560021595]]]] }
-        },    
+        
     ]
 }
 

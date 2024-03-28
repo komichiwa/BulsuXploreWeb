@@ -14,8 +14,23 @@
 	left: 0;
 	top: 0;
 	}
+
+	#overlay {
+		position: fixed; /* Sit on top of the page content */
+		display: none; /* Hidden by default */
+		width: 100%; /* Full width (cover the whole page) */
+		height: 100%; /* Full height (cover the whole page) */
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+		z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+		cursor: pointer;} /* Add a pointer on hover */
+		
 .leaflet-container {
 	overflow: hidden;
+	background: none !important;
 	}
 .leaflet-tile,
 .leaflet-marker-icon,
@@ -118,7 +133,11 @@
 
 
 /* control positioning */
-
+.backgound{
+	width: 100%;
+	height: 100;
+	background-color: rgba(255,255,255,0.3);
+}
 .leaflet-control {
 	position: relative;
 	z-index: 800;
@@ -483,7 +502,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
 	margin-bottom: 15px;
 	}
 .leaflet-popup-content-wrapper {
-	padding: 2px;
+	padding: 8px;
 	width: 350px;
 	text-align:left;
 	border-radius: 12px;
@@ -537,6 +556,15 @@ a.mappedin-link:visited, a.mappedin-link:active, a.mappedin-link:link
 {
 	color: rgb(253, 253, 253);
 }
+
+.icontextpop{
+	text-align: center;
+	color: #222;
+	font-weight: bold;
+	font-size: 18px;
+	margin: 0px;
+}
+
 .center {
 	color: white;
 	position: center;
@@ -596,7 +624,7 @@ a.mappedin-link:visited, a.mappedin-link:active, a.mappedin-link:link
 	width: 18px;
 	height: 14px;
 	font: 16px/14px Tahoma, Verdana, sans-serif;
-	color: #c3c3c3;
+	color: #180202;
 	text-decoration: none;
 	font-weight: bold;
 	background: transparent;
