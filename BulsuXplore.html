@@ -10,9 +10,20 @@
     <link rel="stylesheet" href="css/leaflet.css">
     <link rel="stylesheet" href="css/L.Control.Locate.min.css">
     <link rel="stylesheet" href="css/qgis2web.css">
+    <link rel="stylesheet" href="css/search_getdirection.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-0SwwdF3qyFwZvyjftw4QGKs/fI6TIgzVUzE8+Q8N5waVCAHVyl7e5Tp5jzgwzT50" crossorigin="anonymous">
+  
+
+
     <link rel="stylesheet" href="css/fontawesome-all.min.css">
-    <link rel="stylesheet" href="css/leaflet-search.css">
+    <!-- //for building location search bar -->
+    <link rel="stylesheet" href="css/search_building.css">
+    <!-- for get direction search bar -->
+    <link rel="stylesheet" href="css/search_getdirection.css"> 
     <style>
+
+
+
         #map {
             width: 1920px;
             height: 1080px;
@@ -21,9 +32,33 @@
     <title></title>
 </head>
 
+
 <body>
+
     <div id="map">
+        <button id="directionBtn" class="direction-button"></button>
+    
+        <div id="directionContainer" class="direction-container"></div>
+    
+        <div id="searchContainer">
+            <div class="input-container">
+                <button id="closeSearchBtn" class="close-button">X</button>
+                <!-- <button id="reverseOriginBtn" class="reverse-button">Reverse</button> -->
+                <input type="text" id="origin-input" placeholder="Enter origin">
+                <div>
+                    <ul id="originSuggestions"></ul>
+                </div>
+    
+                <input type="text" id="destination-input" placeholder="Enter destination">
+                <div>
+                    <ul id="destinationSuggestions"></ul>
+                </div>
+    
+                <button id="getdirection-button">Get Direction</button>
+            </div>
+        </div>
     </div>
+    
     <script src="js/qgis2web_expressions.js"></script>
     <script src="js/leaflet.js"></script>
     <script src="js/multi-style-layer.js"></script>
@@ -35,19 +70,27 @@
     <script src="js/rbush.min.js"></script>
     <script src="js/labelgun.min.js"></script>
     <script src="js/labels.js"></script>
-    <script src="js/leaflet-search.js"></script>
+    <script src="https://unpkg.com/leaflet-polyline/dist/leaflet.polyline.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/polyline@^1.0.0/dist/polyline.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet-ant-path/dist/leaflet-ant-path.min.js"></script>
+    <!-- <script src="js/leaflet-search.js"></script> -->
     <script src="data/AOI_GEOJSON_1.js"></script>
     <script src="data/BSX_BLDG_GEOJSON_2.js"></script>
+    <script src="data/BSX_ALL_POIs.js"></script>
     <script src="data/BSX_LNDMRKS_GEOJSON_3.js"></script>
     <script src="data/BSX_GATES_GEOJSON_4.js"></script>
     <script src="data/BSX_POIs_GEOJSON_5.js"></script>
+    <script src="data/BSX_POIs_JSON.js"></script>
     <script src="data/GreenSpace.js"></script>
     <script src="data/Walkpath_2.js"></script>
     <script src="data/MainRoad_1.js"></script>
+    <script src="js/search_building.js"></script>
+    <script src="js/search_getdirection.js"></script>
+    <script src="js/routing_calculation.js"></script>
+    <script src="js/polyline-encoded.js"></script>
+    <script src="js/routing_path_display"></script>
 
     <script>
-
-
 
         var highlightLayer;
         function highlightFeature(e) {
@@ -90,18 +133,19 @@
             return tempDiv.innerHTML;
         }
 
-        document.querySelector(".leaflet-popup-pane").addEventListener("load", function (event) {
-            var tagName = event.target.tagName,
-                popup = map._popup;
-            // Also check if flag is already set.
+// PERMISSION TO DELETE
+        // document.querySelector(".leaflet-popup-pane").addEventListener("load", function (event) {
+        //     var tagName = event.target.tagName,
+        //         popup = map._popup;
+        //     // Also check if flag is already set.
 
-            if (tagName === "IMG" && popup && !popup._updated) {
-                popup._updated = true; // Set flag to prevent looping.
-                popup.update();
-            }
-        }, true);
+        //     if (tagName === "IMG" && popup && !popup._updated) {
+        //         popup._updated = true; // Set flag to prevent looping.
+        //         popup.update();
+        //     }
+        // }, true);
 
-        L.control.locate({ locateOptions: { maxZoom: 19 } }).addTo(map);
+        // L.control.locate({ locateOptions: { maxZoom: 19 } }).addTo(map);
 
         var bounds_group = new L.featureGroup([]);
 
@@ -200,6 +244,7 @@
 
         bounds_group.addLayer(layer_AOI_GEOJSON_1);
         map.addLayer(layer_AOI_GEOJSON_1);
+
 
         //greenspace
         function style_GreenSpace() {
@@ -380,6 +425,7 @@
             pane: 'pane_BSX_LNDMRKS_GEOJSON_3',
             onEachFeature: pop_BSX_LNDMRKS_GEOJSON_3,
             style: style_BSX_LNDMRKS_GEOJSON_3_0,
+            
         });
         bounds_group.addLayer(layer_BSX_LNDMRKS_GEOJSON_3);
         map.addLayer(layer_BSX_LNDMRKS_GEOJSON_3);
@@ -633,6 +679,7 @@
             },
         });
 
+
         bounds_group.addLayer(layer_BSX_POIs_GEOJSON_5);
         map.addLayer(layer_BSX_POIs_GEOJSON_5);
         //MainRoad Lines
@@ -691,6 +738,8 @@
                 interactive: false,
             }
         }
+
+        
         map.createPane('pane_Walkpath_2');
         map.getPane('pane_Walkpath_2').style.zIndex = 402;
         map.getPane('pane_Walkpath_2').style['mix-blend-mode'] = 'normal';
@@ -706,7 +755,35 @@
         bounds_group.addLayer(layer_Walkpath_2);
         map.addLayer(layer_Walkpath_2);
 
+
+//Michelle add search
+        var layer_BSX_ALL_POIs = new L.geoJson(json_BSX_ALL_POIs, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_BSX_ALL_POIs',
+            layerName: 'layer_BSX_ALL_POIs',
+            pane: 'pane_BSX_POIs_GEOJSON_5',
+            onEachFeature: pop_BSX_POIs_GEOJSON_5,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_BSX_POIs_GEOJSON_5_0(feature));
+            },
+        });
+
         setBounds();
+        map.addControl(new L.Control.Search({
+            layer: layer_BSX_ALL_POIs,
+            initial: false,
+            hideMarkerOnCollapse: true,
+            propertyName: 'name',
+            marker: {
+                icon: customIcon, // Use the custom icon for the marker
+            }
+        }));
+
     </script>
 </body>
 

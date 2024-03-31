@@ -1,0 +1,202 @@
+/* getdirection 
+
+setup HTML for direction
+then, setup Javascript for get direction button to display when the search is done.
+And then, When the get direction button is clicked, it will then show the Container for 
+Origin and destination
+
+
+*/
+.direction-button {
+  position: relative;
+  display:none;
+  right: 30px; 
+  top: 10px; 
+  left: 385px;
+  margin: 5px;
+  height: 40px;
+  width: 50px;
+  z-index: 1000;
+  padding: 5px 10px;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 500;
+  background-color: #a70606;
+  background-image: url(images/get-directions-button.png);
+  background-size: cover; 
+  background-position: center; 
+  background-repeat: no-repeat; 
+  background-size: 22px 22px;
+}
+
+.direction-button:hover {
+  background-color: #67a8d2;
+
+}
+
+
+/* GET DIRECTION CONTAINER */
+#search-container {
+  position: absolute;
+  align-items: center;
+  z-index: 1000;
+}
+
+.input-container {
+  display: none;
+  position: absolute;
+  z-index: 1000;
+  align-items: center;
+  /* display: inline-block; */
+  top: 15px;
+  left: 29px;
+
+  background-color: rgba(255, 255, 255, 0.9); /* transparent white background */
+  padding: 10px;
+  border-radius: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* box shadow for container */
+}
+
+
+
+
+
+.input-container {
+  display: none;
+  top: -1%;
+  flex-direction: column; /* Vertical alignment */
+  align-items: center; /* Center input elements horizontally */
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 10px;
+  border-radius: 15px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-top: 20px; /* Add some spacing between inputs */
+}
+
+.input-container input {
+  top:80%;
+  width: 300px;
+  padding: 10px;
+  margin-bottom: 10px; /* Add some spacing between inputs */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+
+#origin-input::placeholder, #destination-input::placeholder {
+  font-style: italic;
+  font-weight: 100;
+  font-family: Helvetica;
+  font-size: 15px;
+}
+
+.input-container input {
+  width: 300px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+#suggestions {
+  position: absolute;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  min-width: 120px;
+  max-height: 122px;
+  border-top: none;
+  border-radius: 0 0 5px 5px;
+  background-color: #ffffff;
+  border: #f00;
+  z-index: 1000;
+  overflow-y: auto;
+
+
+}
+
+.input-container li {
+  padding: 10px;
+  border: 1px;
+  width: 300px;
+  color: #000000 !important;
+  top: 100%;
+  left: 0;
+  right: 0;
+  border: 5px;
+}
+
+
+.input-container li::-webkit-scrollbar {
+  width: 4px;
+}
+
+.input-container li::-webkit-scrollbar-thumb {
+  background-color: #848484;
+  border-radius: 2px;
+}
+
+.input-container li::-webkit-scrollbar-track:hover {
+  background-color: #ddd;
+}
+
+
+
+
+
+
+.input-container ul li:hover {
+  background-color: #f0f0f0;
+}
+
+#getdirection-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #ba1b2d;
+  color: #fff;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 150px;
+  margin: 0 auto; /* Center horizontally */
+  display: block; /* Ensure it's displayed as a block-level element */
+  position: relative; /* Add position relative to make ::before work */
+  padding-left: 32px;
+}
+
+#getdirection-button::before {
+  content: "    "; /* Empty content */
+  position: absolute; /* Position it relative to the button */
+  top: 50%; /* Move it to the middle vertically */
+  left: 10px; /* Adjust left position */
+  transform: translateY(-50%); /* Adjust to center vertically */
+  width: 22px; /* Set width of the icon */
+  height: 22px; /* Set height of the icon */
+  background-image: url(images/get-directions-button.png); /* Set the icon image */
+  background-size: cover; /* Adjust the size of the icon */
+}
+
+#getdirection-button:hover {
+  background-color:  #67a8d2;
+}
+
+
+
+
+/* button */
+.close-button {
+  position: absolute;
+  font-size: 15px;
+  right: 10px;
+  background-color: transparent;
+  border: none;
+  color: #333;
+  cursor: pointer;
+}
+
+.close-button:hover {
+  color: #f00;
+}

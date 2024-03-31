@@ -1,0 +1,120 @@
+var route;
+var antPath;
+var routeoutline;
+var startMarker;
+var endMarker;
+
+// Function to decode polyline to convert into sets of coordinates
+function decodePolyline(str, precision) {
+    var index = 0,
+        lat = 0,
+        lng = 0,
+        coordinates = [],
+        shift = 0,
+        result = 0,
+        byte = null,
+        latitude_change,
+        longitude_change,
+        factor = Math.pow(10, precision || 6);
+
+    while (index < str.length) {
+        byte = null;
+        shift = 0;
+        result = 0;
+
+        do {
+            byte = str.charCodeAt(index++) - 63;
+            result |= (byte & 0x1f) << shift;
+            shift += 5;
+        } while (byte >= 0x20);
+
+        latitude_change = ((result & 1) ? ~(result >> 1) : (result >> 1));
+
+        shift = result = 0;
+
+        do {
+            byte = str.charCodeAt(index++) - 63;
+            result |= (byte & 0x1f) << shift;
+            shift += 5;
+        } while (byte >= 0x20);
+
+        longitude_change = ((result & 1) ? ~(result >> 1) : (result >> 1));
+
+        lat += latitude_change;
+        lng += longitude_change;
+
+        coordinates.push([lat / factor, lng / factor]);
+    }
+
+    return coordinates;
+}
+
+// to display route on the map
+function displayRoute(data) {
+    // to emove existing layers if they exist to avoid overlap
+    removeLayers();
+
+    // Decode polyline
+    var routeGeometry = data.trip.legs[0].shape;
+    var decodedPolyline = decodePolyline(routeGeometry);
+   
+    // Add main routes and outline    
+    routeoutline = L.polyline(decodedPolyline, { color: 'darkblue', weight: 13, opacity: 0.5 }).addTo(map);
+    route = L.polyline(decodedPolyline, { color: '6AC6C6', zIndex: 1000 }).addTo(map);
+
+    // Add effects to routelines
+    antPath = L.polyline.antPath(decodedPolyline, {
+        delay: 1200, 
+        dashArray: [10, 70], 
+        weight: 5, 
+        color: '#6AC6C6', 
+        pulseColor: '#83B4BF' 
+    }).addTo(map);
+  
+    map.fitBounds(route.getBounds());
+
+    // MARKERS; A & B 
+    var startPoint = decodedPolyline[0];
+    var endPoint = decodedPolyline[decodedPolyline.length - 1];
+
+    var startIcon = L.icon({
+        iconUrl: 'images/start.png',
+        iconSize: [40, 40],
+        iconAnchor: [16, 32], 
+        popupAnchor: [32, -32] 
+    });
+
+    var endIcon = L.icon({
+        iconUrl: 'images/end-marker.png',
+        iconSize: [40, 40], 
+        iconAnchor: [16, 32],
+        popupAnchor: [0, -32] 
+    });
+
+    startMarker = L.marker(startPoint, { icon: startIcon }).addTo(map);
+    endMarker = L.marker(endPoint, { icon: endIcon }).addTo(map);
+
+    map.fitBounds(route.getBounds());
+}
+
+// to remove existing layers
+function removeLayers() {
+    if (map.hasLayer(route)) {
+        map.removeLayer(route);
+    }
+    if (map.hasLayer(routeoutline)) {
+        map.removeLayer(routeoutline);
+    }
+    if (map.hasLayer(antPath)) {
+        map.removeLayer(antPath);
+    }
+    if (map.hasLayer(startMarker)) {
+        map.removeLayer(startMarker);
+    }
+    if (map.hasLayer(endMarker)) {
+        map.removeLayer(endMarker);
+    }
+}
+
+directionBtn.addEventListener('click', removeLayers);
+closeSearchBtn.addEventListener('click', removeLayers);

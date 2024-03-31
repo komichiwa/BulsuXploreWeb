@@ -56,7 +56,7 @@
         }
         
         .fa, .leaflet-container, a {
-            color: #ffffff !important;
+            color: #ffffff;
             margin: 5px;
         }
         .leaflet-control-zoom-in, .leaflet-control-zoom-out,

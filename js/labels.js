@@ -22,6 +22,13 @@ function resetLabels(markers) {
     }
   labelEngine.update();
 }
+//function 1
+//label 1
+//box 1
+-deployment
+
+
+
 
 function addLabel(layer, id) {
 
